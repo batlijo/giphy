@@ -2,18 +2,17 @@
 
 body {
 font-family: 'Gochi Hand', cursive; 
-color: tomato;
+color: #fc566c;
 background-image: url("image1.jpg");
 background-size:auto;
-
+text-align: center;
 }
 
 h1 {
     color: black;
-    margin-bottom: 30px;
-    padding-top: 27px;
+    margin-bottom: 9px;
+    padding-top: 68px;
     font-size: 45px;
-    text-indent: 42px;
 }
 
 button.baby {
@@ -22,7 +21,7 @@ button.baby {
     font-size: 20px;
     border-radius: 20px;
     background-color: white;
-    color: tomato;
+    color: #fc566c;
 }
 
 form#giphy-form {
@@ -45,4 +44,16 @@ input#user-input {
 label {
     font-size: 30px;
     color: black;
+}
+input#user-input {
+    background-color: #fc566c;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Gochi Hand', cursive;
+    font-size: medium;
+}
+
+.container {
+    padding: 25px 0 25px 0;
+    border-radius: 25px;
 }

@@ -1,62 +1,69 @@
-	var babies = ["puppies"," baby tigers", "baby hedgehogs"];
+	// array of topics which are baby animals yay
+	var babies = ["puppies", " baby tigers", "baby hedgehogs"];
 
-	function renderButtons(){
+	// a function that renders the buttons for this array
+	function renderButtons() {
 
-		$("#baby-view").empty();
+	    $("#baby-view").empty();
 
-        for (var i = 0; i < babies.length; i++) {
+	    // create for loop for array topic babies button which will append
+	    for (var i = 0; i < babies.length; i++) {
 
-          var a = $("<button>");
-          a.addClass("baby");
-          a.attr("data-name", babies[i]);
-          a.text(babies[i]);
-          $("#baby-view").append(a);
-        }
-      }
+	        var a = $("<button>");
+	        a.addClass("baby");
+	        a.attr("data-name", babies[i]);
+	        a.text(babies[i]);
+	        $("#baby-view").append(a);
+	    }
+	}
 
-      $("#add-baby").on("click", function(event) {
-        event.preventDefault();
+	// on click event add button that pushes user input
+	$("#add-baby").on("click", function(event) {
+	    event.preventDefault();
 
-        var baby = $("#user-input").val().trim();
-        babies.push(baby);
-        renderButtons();
-        $("#user-input").val("");
-      });
+	    var baby = $("#user-input").val().trim();
+	    babies.push(baby);
+	    renderButtons();
+	    $("#user-input").val("");
+	});
 
-      renderButtons();
+	renderButtons();
 
-	$("button").on("click", function() {
-      var babyButton = $(this).attr("data-name");
-console.log(babyButton)
-      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        babyButton + "&api_key=dc6zaTOxFJmzC&limit=10";
+	// this on click event button infiltrates the dom with giphy api
+	$(document).on("click", "button", function() {
+	    var babyButton = $(this).attr("data-name");
+	    console.log(babyButton)
+	    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+	        babyButton + "&api_key=dc6zaTOxFJmzC&limit=10";
 
-      $.ajax({
-          url: queryURL,
-          method: "GET"
-        })
-   
-        .done(function(response) {
-          var results = response.data;
+	    // ajax queries the giphy URL to grab the info and the done function 
+	    // and for loop loops through the users results and displays the rating
+	    // for each giphy
+	    $.ajax({
+	        url: queryURL,
+	        method: "GET"
+	    })
 
-          for (var i = 0; i < results.length; i++) {
+	    .done(function(response) {
+	        var results = response.data;
 
-            if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-          
-              var gifDiv = $("<div class='item'>");
+	        for (var i = 0; i < results.length; i++) {
 
-              var rating = results[i].rating;
+	            if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
 
-              var p = $("<p>").text("Rating: " + rating);
+	                var gifDiv = $("<div class='item'>");
 
-              var babyImage = $("<img>");
+	                var rating = results[i].rating;
 
-              babyImage.attr("src", results[i].images.fixed_height.url);
-              gifDiv.append(p);
-              gifDiv.append(babyImage);
-              $("#gifs-appear-here").prepend(gifDiv);
-            }
-          }
-        });
-    });
+	                var p = $("<p>").text("Rating: " + rating);
 
+	                var babyImage = $("<img>");
+
+	                babyImage.attr("src", results[i].images.fixed_height.url);
+	                gifDiv.append(p);
+	                gifDiv.append(babyImage);
+	                $("#gifs-appear-here").prepend(gifDiv);
+	            }
+	        }
+	    });
+	});
