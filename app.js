@@ -59,7 +59,12 @@
 
 	                var babyImage = $("<img>");
 
-	                babyImage.attr("src", results[i].images.fixed_height.url);
+	                // this is to make our giphys to be still when loaded on browser
+	                babyImage.addClass("gif");
+	                babyImage.attr("src", results[i].images.fixed_height_still.url);
+          			babyImage.attr("data-still", results[i].images.fixed_height_still.url);
+          			babyImage.attr("data-animated", results[i].images.fixed_height.url);
+          			babyImage.attr("data-state", "still");
 	                gifDiv.append(p);
 	                gifDiv.append(babyImage);
 	                $("#gifs-appear-here").prepend(gifDiv);
@@ -67,3 +72,17 @@
 	        }
 	    });
 	});
+
+$(document).on("click", ".gif", function() {
+  var state =  $(this).attr("data-state");
+  console.log(state);
+
+// this makes our giphy still until they are clicked on
+ if(state === "still"){
+    $(this).attr("src", $(this).attr("data-animated"));
+    $(this).attr("data-state", "animated");
+  }else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+  }
+})
