@@ -1,5 +1,4 @@
 
-
 body {
 font-family: 'Gochi Hand', cursive; 
 color: #fc566c;
@@ -56,4 +55,8 @@ input#user-input {
 .container {
     padding: 25px 0 25px 0;
     border-radius: 25px;
+}
+
+img {
+    border: solid 10px #fc566c;
 }
